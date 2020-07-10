@@ -1,0 +1,345 @@
+-------------- GIT BASIC COMMANDS PART - 1--------
+               More Detailed 
+
+
+1. Go to our github profile on web and create a new repository  name it git_test2 and a description(optional) and click save.
+   go to settings ssh and copy the url , you  need to clone the url in your local repository using git
+
+2. Come back to your terminal , go to the folder ( for my case github ) 
+   type : git clone git@github.com:arpansahaccn/git_test.git
+
+3. git remote -v [ to see the url of the repository you have created in github ]
+   git branch -a [ it will show that there is no one one branch that is master]
+
+4.  add a README.md file , test.c and test.cpp file and hello.txt file 
+     touch README.md 
+     touch test.c
+     touch test2.cpp
+     touch hello_world.txt
+    
+    now , choose your editor(for example gedit) and write a basic c and c++ program 
+   let me show it then .
+
+   // our c++ program
+    gedit test2.cpp                               
+   
+    #include<iostream>                          
+    
+    using namespace std ;                         
+                                                 
+                                
+    int main()                                    
+    {
+     cout<<"Hello World Checking c++" ;           
+                                                  
+                                                 
+      return 0  ;
+    }
+
+  // our c program
+   gedit test.c
+
+    #include<stdio.h>
+   
+  int add(int n1 , int n2)
+  {
+     int result ;
+     result = n1 + n2  ;
+     return result ;
+     
+  }
+
+  int sub(int n1 , int n2)
+  {
+    int result ;
+     result = n1 - n2  ;
+     return result ;
+  }
+
+
+   int main()
+   {
+    int num1 = 10 , num2 = 5 ;
+    int sum , minus ;
+    sum = add(num1,num2);
+    minus = sub(num1,num2);
+ 
+   printf("Sum = %d\n", sum);
+   printf("Minus = %d", minus);
+   return 0;
+   }
+
+
+
+  5.   To initialize repository from existing code 
+     git init 
+     we will see the .git directory at the end of the url
+     now , what is this .git directory it is basically contyains all the details about your repository 
+     here, git_test2 , it helps to track the repository
+
+     enter  ls -la 
+     you  will see the .git directory  
+    
+    remove it by rm -rf .git[not recommended just for practice]
+    now type , ls -la , will not see .git directory since it is already deleted 
+
+    now again ,To initialize repository from existing code 
+     git init  
+     type ls -la , it shows .git directory 
+
+6. all about git ignore [ suppose we have saved or created some seetings which is specific to our machine we dont want to include it in our remote repo
+   and make it public so .gitignore is used )
+      create a directory mkdir .project
+       see the directory exists or not by ls -la
+        
+     touch .gitignore [creates a .gitignore directory]
+     open .gitignore directory using your favorite editor.
+     gedit .gitignore 
+
+    all the file names that we want to ignore in .gitignore directory 
+    
+     for example : .project // here .project directory is ignored
+                   *.cpp // here *is wildcard operator // all the files with .cpp extension is ignored  
+
+  now if we do git status 
+   we will see that instead of earlier displayed tracked file that included  
+   README.md , test.c , test.cpp , hello_world.txt 
+   we will have only README.txt , test.c , hello.txt and .gitignore file since we have put 
+  .project and extension .cpp under gitignore list
+
+7. now add the .gitignore file to the stageing area 
+   add .gitignore 
+    To see the current status of the files 
+   git status 
+  [will see both of the above mentioned files are red in color and written untraced which means that it has not been 
+   pused into the staging area]
+  [Now as we know the git is a massive save button , so saveing a file involves two steps [add and commit] 
+   first we put the files or directory in stageing area and then commit it , know we need to know why the stageing area and why not directly commit it 
+   this is because suppose we are working on different parts of a code some parts we want to commit and some we want to still carry on working 
+   thus, stagging area comes handy]
+
+   and shows other files README.md, test.c , hello.txt in untracked and red color 
+
+8. add README.md file in stageing area
+   git add README.md
+
+  now open your favorite editor ( for my case gedit ) and modify the README.md file and add This Is My First Github Project!
+
+    gedit README.md
+   add the line This my first github project and other details such as what are the files contained
+   in this repo etc.
+   now run git status 
+   you will see that the file README.txt is red in color and shown modified as it was previously staged and tracked file
+   since we have modified it now it has become unstaged and uncommited but tracked file. 
+
+   Now , we will push the README.txt file in stagging area
+   git add README.md
+
+  now when we will run git status 
+  and see that README.txt is written in green and is tracked
+  wheras other files that include test.c and hello_world.txt are untracked and red in color
+
+    now how to delete the changes that we have made
+   git reset README.md [ it resets the changes made to README.txt ] 
+   if we want to reset everything i.e all the changes we have made then 
+   git reset
+   we will see that .gitignore and all other files are back to where it was in red colour , so not staged not tracked .
+   git add .gitignore again in the stageing area
+
+9. Now commit the .getignore directory
+   git commit -m "Your meassage" [ for my case : "Initial commits , adding .gitignore ]
+   git status 
+   we will see that .gitignore file is commited in green color and other files in red color non staged and non commited
+
+
+10.   Now we will add all the files in the stageing area
+   git add . OR git add -A
+   git status [will show us that all the files are in greeen and have been put in the stageing area and tracked] 
+   Now we will commit 
+   git commit -m "all files commited" 
+   git status [will show us that everything is commited , nothing to commit know , we cant rest since it already has been commited]
+
+  Now see the history of changes in the saved file
+  git log
+  It shows the hexcode(unique), the author who have commited the changes,emailid,time and what changes have been made ( it 
+  basically adds the message what you have put under commit)
+   
+
+11. open the test.c file using your favourite editor 
+     gedit test.c
+     modify the sub function and replace it by divide function 
+
+    // code :
+
+// our c program
+   gedit test.c
+
+    #include<stdio.h>
+   
+  int add(int n1 , int n2)
+  {
+     int result ;
+     result = n1 + n2  ;
+     return result ;
+     
+  }
+
+  int div(int n1 , int n2)
+  {
+    int result ;
+     result = n1 / n2  ;
+     return result ;
+  }
+
+
+   int main()
+   {
+    int num1 = 10 , num2 = 5 ;
+    int sum , divide ;
+    sum = add(num1,num2);
+    divide = div(num1,num2);
+ 
+   printf("Sum = %d\n", sum);
+   printf("Divide = %d", divide);
+   return 0;
+   }
+  
+  type : git status 
+   it will show that test.c is modified , tracked and red in color , since earlier we know that test.c was staged but not
+   commited since we have modified it i has been tracked and has become unstaged and uncommited.
+
+12. git diff 
+    it shows us the differnce/ changes we nmade to our file (by indicating a +sign)
+
+    git status [ shows README.txt, hello_world.txt and .gitignore in green]
+   
+    git add . OR git add -A  [add all the files in the stageing area ]
+
+    git commit - m "Substraction function replaced with Divide function"
+   
+    git pull origin master 
+    
+    This is very important since we are working in our local repo someone may have commited some changes in the 
+    remote repo so we need to pull the remote repo first  before pushing our changes.
+    If no one has commited that it shows already up-to-date.
+
+
+  Finally push the local repository from your local machine using git to remote repository github
+  git push origin master 
+  Here , origin is the placeholder for the remote url ex: https://github.com/arpansahaccn/git_test
+  so that everytime we need to clone a repo we dont need to write the entire url , git provides us by default origin
+  so we can have multiple instances of repository with unique name of  repository but with unique name.
+
+
+  COMMON WORKFLOW 
+   Now we will look at how most of the developers work with git
+   now in daily workflow working with the master branch is not a good practice we work with other branches
+
+1.  Create a new  branch , say we want to work with test-multiply branch
+    git branch test-multiply
+    enter into the branch
+    git checkout test-multiply
+    now if we check all the branches that exists in our repo 
+    git branch -a
+    we will see master and *test-multiply (* means currently we are in this branch)  
+    know let us modify the code in test.c file 
+    gedit test.c file add a multiply function.
+
+ // our c program
+   gedit test.c
+
+    #include<stdio.h>
+   
+  int add(int n1 , int n2)
+  {
+     int result ;
+     result = n1 + n2  ;
+     return result ;
+     
+  }
+
+  int div(int n1 , int n2)
+  {
+    int result ;
+     result = n1 / n2  ;
+     return result ;
+  }
+
+  int multi(int n1 , int n2)
+  {
+    int result ;
+     result = n1  * n2  ;
+     return result ;
+  }
+
+   int main()
+   {
+    int num1 = 10 , num2 = 5 ;
+    int sum , divide , multiply;
+    sum = add(num1,num2);
+    divide = div(num1,num2);
+    multiply = multi(num1,num2);
+ 
+   printf("Sum = %d\n", sum);
+   printf("Divide = %d\n", divide);
+   printf("Multiply = %d", multiply);
+   return 0;
+   }
+   
+    
+ now follow these commands , uses already stated above
+
+ git status [shows test.c in read and modified]
+ git add -A
+ git commit -m "adding multiply function"
+
+ Now Commiting this does not bring any changes in our local master branch or remote repository.
+
+2. Create a branch for desired feature
+
+  git push -u  origin test-multiply
+  [Basically here we are pushing our test-multiply branch to remote repository which is origin 
+   and here -u is used to associate our local test-multiply branch to remote test-multiply branch . So, that everytime that we 
+   we want to push branch to remote repository we will only write 
+   git push
+   git pull
+ 
+  git branch -a
+  As we already know it is used to list all the branchezs in our local repository
+  here, it shows us that locally there is 2 branch master and *test-multiply(* means here we are working currently)
+      and it also show 2 remote branches master and tet-multiply.
+   Now, the significance of these is that there are lot of companies that working on branches , change and modifies code, performs 
+  unit testing in remote repo , in branches before mergeing it with master.
+
+3. Merge a Branch
+  
+   Now will enter our master branch
+   git checkout master
+   we will pull the master branch again
+   git pull origin master
+
+  git branch --merged [ it shows only the master branch since test-multiply branch has not been merged yet]
+  Now we will merge test-multiply branch with master 
+  git merge test-multiply
+
+ now finally push it to remote repository
+  git push origin master
+
+
+4. Deleting a branch 
+   
+   git branch --merged [This time it will show us thatt there are two branches have been merged master and test-multiply]
+
+   To delete the test-multiply branch
+   git branch -d test-multiply
+   now when we run git branch -a
+   it shows us that there is only one branch master and teat-multiply has been deleted from our local repository but it still exists in
+   our remote repository]
+
+   to finally delete it from remote repository type
+   git push origin --delete test-multiply
+
+  git branch -a , it only shows master branch both locally and remotely.
+
+
+      -----------------Thank You ------------------
